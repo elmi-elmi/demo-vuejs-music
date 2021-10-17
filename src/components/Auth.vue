@@ -1,6 +1,10 @@
 <template>
   <!-- Auth Modal -->
-  <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="modal">
+  <div
+    class="fixed z-10 inset-0 overflow-y-auto "
+    id="modal"
+    :class="{ hidden: !authModalShow }"
+  >
     <div
       class="
         flex
@@ -287,7 +291,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    authModalShow() {
+      return this.$store.getters.authModalShow;
+    },
+  },
+};
 </script>
 
 <style></style>

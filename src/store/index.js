@@ -5,10 +5,15 @@ export default createStore({
     authModalShow: false,
   },
   mutations: {
-    authModalToggl(state) {
+    authModalToggle(state) {
       state.authModalShow = !state.authModalShow;
     }
   },
+  getters: {
+    authModalShow(state) {
+      return state.authModalShow
+    }
+  }
   // actions: {
   // },
   // modules: {
