@@ -10,7 +10,9 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <a class="px-2 text-white" href="#">Login / Register</a>
+            <a class="px-2 text-white" href="#" @click.prevent="authModalToggle"
+              >Login / Register</a
+            >
           </li>
           <li>
             <a class="px-2 text-white" href="#">Manage</a>
@@ -22,7 +24,16 @@
 </template>
 
 <script>
-export default {};
+import { mapMutations } from 'vuex';
+export default {
+  methods: {
+    ...mapMutations(['authModalToggle']),
+    // authModalToggle() {
+    //   this.$store.commit('authModalToggle');
+    //   console.log(this.$store.state.authModalShow);
+    // },
+  },
+};
 </script>
 
 <style></style>
