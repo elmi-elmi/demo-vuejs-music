@@ -4,5 +4,10 @@ import router from './router';
 import store from './store/index.js';
 import './assets/tailwind.css';
 import './assets/main.css';
+import veevalidationPlugin from './includes/validation.js';
 
-createApp(App).use(store).use(router).mount('#app');
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(veevalidationPlugin, { foo: 5 });
+app.mount('#app');

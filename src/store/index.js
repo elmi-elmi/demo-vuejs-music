@@ -7,13 +7,13 @@ export default createStore({
   mutations: {
     authModalToggle(state) {
       state.authModalShow = !state.authModalShow;
-    }
+    },
   },
   getters: {
     authModalShow(state) {
-      return state.authModalShow
-    }
-  }
+      return state.authModalShow;
+    },
+  },
   // actions: {
   // },
   // modules: {
