@@ -168,7 +168,8 @@
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input
+              <vee-field
+                name="email"
                 type="email"
                 class="
                   block
@@ -184,11 +185,13 @@
                 "
                 placeholder="Enter Email"
               />
+              <ErrorMessage name="email" class="text-red-600" />
             </div>
             <!-- Age -->
             <div class="mb-3">
               <label class="inline-block mb-2">Age</label>
-              <input
+              <vee-field
+                name="age"
                 type="number"
                 class="
                   block
@@ -203,11 +206,13 @@
                   rounded
                 "
               />
+              <ErrorMessage name="age" class="text-red-600" />
             </div>
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <input
+              <vee-field
+                name="password"
                 type="password"
                 class="
                   block
@@ -223,11 +228,13 @@
                 "
                 placeholder="Password"
               />
+              <ErrorMessage name="password" class="text-red-600" />
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Confirm Password</label>
-              <input
+              <vee-field
+                name="confirm_password"
                 type="password"
                 class="
                   block
@@ -243,6 +250,7 @@
                 "
                 placeholder="Confirm Password"
               />
+              <ErrorMessage name="confirm_password" class="text-red-600" />
             </div>
             <!-- Country -->
             <div class="mb-3">
@@ -305,11 +313,11 @@ export default {
     return {
       tab: 'login',
       schema: {
-        name: 'required',
-        email: '',
-        age: '',
-        password: '',
-        confirm_password: '',
+        name: 'required|min:3|max:100|alpha_spaces',
+        email: 'required|min:3|max:100|email',
+        age: 'required|min_value:18|max_value:100',
+        password: 'required|min:3|max:100',
+        confirm_password: 'confirmed:@password',
         tos: '',
       },
     };
