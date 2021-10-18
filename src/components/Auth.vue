@@ -146,7 +146,8 @@
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
-              <input
+              <vee-field
+                name="name"
                 type="text"
                 class="
                   block
