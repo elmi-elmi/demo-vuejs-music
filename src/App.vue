@@ -475,6 +475,7 @@
 <script>
 import AppHeader from './components/Header.vue';
 import AppModal from './components/Auth.vue';
+
 export default {
   components: { AppHeader, AppModal },
 };
