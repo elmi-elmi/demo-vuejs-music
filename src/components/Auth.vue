@@ -301,7 +301,7 @@
               />
 
               <label class="inline-block">Accept terms of service</label>
-              <ErrorMessage class="text-red-600 " name="tos" />
+              <ErrorMessage class="block text-red-600 " name="tos" />
             </div>
             <button
               type="submit"
