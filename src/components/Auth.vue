@@ -142,7 +142,12 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <vee-form v-show="tab === 'register'" :validation-schema="schema">
+          <vee-form
+            @submit="register"
+            v-show="tab === 'register'"
+            :validation-schema="schema"
+            :initial-values="userData"
+          >
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -213,8 +218,12 @@
               <label class="inline-block mb-2">Password</label>
               <vee-field
                 name="password"
-                type="password"
-                class="
+                :bails="false"
+                v-slot="{ field, errors }"
+              >
+                <input
+                  type="password"
+                  class="
                   block
                   w-full
                   py-1.5
@@ -226,9 +235,13 @@
                   focus:outline-none focus:border-black
                   rounded
                 "
-                placeholder="Password"
-              />
-              <ErrorMessage name="password" class="text-red-600" />
+                  placeholder="Password"
+                  v-bind="field"
+                />
+                <div class="text-red-600" v-for="error in errors" :key="error">
+                  {{ errors }}
+                </div>
+              </vee-field>
             </div>
             <!-- Confirm Password -->
             <div class="mb-3">
@@ -255,7 +268,9 @@
             <!-- Country -->
             <div class="mb-3">
               <label class="inline-block mb-2">Country</label>
-              <select
+              <vee-field
+                as="select"
+                name="country"
                 class="
                   block
                   w-full
@@ -272,15 +287,21 @@
                 <option value="USA">USA</option>
                 <option value="Mexico">Mexico</option>
                 <option value="Germany">Germany</option>
-              </select>
+                <option value="Shiraz">Shiraz</option>
+              </vee-field>
+              <ErrorMessage class="text-red-600" name="country" />
             </div>
             <!-- TOS -->
             <div class="mb-3 pl-6">
-              <input
+              <vee-field
+                value="1"
+                name="tos"
                 type="checkbox"
-                class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+                class="block w-4 h-4 float-left -ml-6 mt-1 rounded "
               />
+
               <label class="inline-block">Accept terms of service</label>
+              <ErrorMessage class="text-red-600 " name="tos" />
             </div>
             <button
               type="submit"
@@ -317,9 +338,12 @@ export default {
         email: 'required|min:3|max:100|email',
         age: 'required|min_value:18|max_value:100',
         password: 'required|min:3|max:100',
-        confirm_password: 'confirmed:@password',
-        country: '',
-        tos: '',
+        confirm_password: 'password_mismatch:@password',
+        country: 'required|country_excluded:Shiraz',
+        tos: 'tos',
+      },
+      userData: {
+        country: 'USA',
       },
     };
   },
@@ -328,6 +352,9 @@ export default {
   },
   methods: {
     ...mapMutations(['authModalToggle']),
+    register(values) {
+      console.log(values);
+    },
   },
 };
 </script>
