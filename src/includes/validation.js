@@ -46,9 +46,9 @@ export default {
           min_value: `This field ${ctx.field} is too low`,
           max_value: `This field ${ctx.field} is too high`,
           exclude: `You are not allowed to use this value for the field ${ctx.field}`,
-          country_excluded: `Due to the restrictions, we do not accept users from this locations.`,
-          password_mismatch: `The password do not match`,
-          tos: `You must accept the Term of Service`,
+          country_excluded: 'Due to the restrictions, we do not accept users from this locations.',
+          password_mismatch: 'The password do not match',
+          tos: 'You must accept the Term of Service',
         };
         const message = messages[ctx.rule.name]
           ? messages[ctx.rule.name]
