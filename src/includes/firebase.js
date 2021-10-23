@@ -1,5 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,5 +14,7 @@ const firebaseConfig = {
   appId: '1:601084594658:web:8ce5e12fbef14d2d03d1bb',
 };
 
+const fireBaseApp = initializeApp(firebaseConfig);
+const db = getFirestore();
 // Initialize Firebase
-export default initializeApp(firebaseConfig);
+export { fireBaseApp, db };

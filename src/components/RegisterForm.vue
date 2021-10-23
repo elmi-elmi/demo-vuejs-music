@@ -186,6 +186,9 @@
 
 <script>
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../includes/firebase';
+
 // import firebase from '@/includes/firebase';
 
 export default {
@@ -222,6 +225,22 @@ export default {
         userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       } catch (error) {
         console.log('error', error);
+        this.reg_in_submission = false;
+        this.reg_show_alert = true;
+        this.reg_alert_variant = 'bg-red-500';
+        this.reg_alert_msg = error.message;
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, 'users'), {
+          name: values.name,
+          age: values.age,
+          country: values.country,
+          email: values.email,
+        });
+      } catch (error) {
+        console.log(error);
         this.reg_in_submission = false;
         this.reg_show_alert = true;
         this.reg_alert_variant = 'bg-red-500';
