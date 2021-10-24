@@ -192,7 +192,7 @@ export default {
         name: 'required|min:3|max:100|alpha_spaces',
         email: 'required|min:3|max:100|email',
         age: 'required|min_value:18|max_value:100',
-        password: 'required|min:3|max:100',
+        password: 'required|min:3|max:32',
         confirm_password: 'password_mismatch:@password',
         country: 'required|country_excluded:Shiraz',
         tos: 'tos',

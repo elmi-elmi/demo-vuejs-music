@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -17,6 +17,8 @@ const firebaseConfig = {
 
 const fireBaseApp = initializeApp(firebaseConfig);
 const db = getFirestore();
-const auth = getAuth();
+
 // Initialize Firebase
-export { fireBaseApp, db, auth };
+export {
+  fireBaseApp, db, onAuthStateChanged,
+};

@@ -478,5 +478,8 @@ import AppModal from './components/Auth.vue';
 
 export default {
   components: { AppHeader, AppModal },
+  created() {
+    this.$store.dispatch('intit_login');
+  },
 };
 </script>

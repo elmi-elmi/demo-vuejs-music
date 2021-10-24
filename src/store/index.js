@@ -1,7 +1,11 @@
 import { createStore } from 'vuex';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, getAuth,
+} from 'firebase/auth';
+
 import { setDoc, doc } from 'firebase/firestore';
-import { db, auth } from '@/includes/firebase';
+
+import { db } from '@/includes/firebase';
 
 export default createStore({
   state: {
@@ -23,6 +27,7 @@ export default createStore({
   },
   actions: {
     async register({ commit }, payload) {
+      const auth = getAuth();
       const userCred = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
 
       await setDoc(doc(db, 'users', userCred.user.uid), {
@@ -35,6 +40,25 @@ export default createStore({
       await updateProfile(userCred.user, { displayName: payload.name });
 
       commit('authToggle');
+    },
+    intit_login({ commit }) {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log('In th init_login', user);
+      if (user) {
+        console.log('init_lgin active');
+        commit('authToggle');
+      }
+    },
+    async login({ commit }, payload) {
+      try {
+        const auth = getAuth();
+
+        await signInWithEmailAndPassword(auth, payload.email, payload.password);
+        commit('authToggle');
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });
