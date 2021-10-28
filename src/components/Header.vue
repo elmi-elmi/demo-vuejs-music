@@ -19,7 +19,9 @@
               <a class="px-2 text-white" href="#">Manage</a>
             </li>
             <li>
-              <a class="px-2 text-white" href="#">Signout</a>
+              <a class="px-2 text-white" href="#" @click.prevent="signout"
+                >Signout</a
+              >
             </li>
           </template>
         </ul>
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -37,6 +39,7 @@ export default {
   },
   methods: {
     ...mapMutations(['authModalToggle']),
+    ...mapActions(['signout']),
     // authModalToggle() {
     //   this.$store.commit('authModalToggle');
     //   console.log(this.$store.state.authModalShow);
