@@ -51,14 +51,10 @@ export default createStore({
       }
     },
     async login({ commit }, payload) {
-      try {
-        const auth = getAuth();
+      const auth = getAuth();
 
-        await signInWithEmailAndPassword(auth, payload.email, payload.password);
-        commit('authToggle');
-      } catch (error) {
-        console.log(error);
-      }
+      await signInWithEmailAndPassword(auth, payload.email, payload.password);
+      commit('authToggle');
     },
     async signout({ commit }) {
       await getAuth().signOut();
