@@ -60,5 +60,9 @@ export default createStore({
         console.log(error);
       }
     },
+    async signout({ commit }) {
+      await getAuth().signOut();
+      commit('authToggle');
+    },
   },
 });
