@@ -2,9 +2,7 @@ import { createStore } from 'vuex';
 import {
   createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, getAuth,
 } from 'firebase/auth';
-
 import { setDoc, doc } from 'firebase/firestore';
-
 import { db } from '@/includes/firebase';
 
 export default createStore({
@@ -44,9 +42,7 @@ export default createStore({
     intit_login({ commit }) {
       const auth = getAuth();
       const user = auth.currentUser;
-      console.log('In th init_login', user);
       if (user) {
-        console.log('init_lgin active');
         commit('authToggle');
       }
     },
