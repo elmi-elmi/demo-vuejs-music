@@ -20,6 +20,7 @@ const routes = [
   },
   {
     path: '/manage-music',
+    // alias:'/manage',
     name: 'Manage',
     component: Manage,
   },
