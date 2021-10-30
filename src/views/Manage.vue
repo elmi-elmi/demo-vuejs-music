@@ -299,16 +299,16 @@
 </template>
 
 <script>
-import store from '@/store';
+// import store from '@/store';
 
 export default {
-  name: 'Manage',
-  beforeRouteEnter(to, from, next) {
-    if (store.state.userLoggedIn) {
-      next();
-    } else {
-      next({ name: 'Home' });
-    }
-  },
+  // name: 'Manage',
+  // beforeRouteEnter(to, from, next) {
+  //   if (store.state.userLoggedIn) {
+  //     next();
+  //   } else {
+  //     next({ name: 'Home' });
+  //   }
+  // },
 };
 </script>

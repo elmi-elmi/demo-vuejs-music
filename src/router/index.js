@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Manage from '@/views/Manage.vue';
+import store from '@/store'; // ../store/index
 
 const routes = [
   {
@@ -44,7 +45,16 @@ const router = createRouter({
   linkExactActiveClass: 'text-yellow-500',
 });
 
-// router.beforeEach((to, from, next) => {
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  if (!to.matched.some((record) => record.meta.requiresAuth)) {
+    next();
+    return;
+  }
+
+  if (store.state.userLoggedIn) {
+    next();
+  } else {
+    next({ name: 'Home' });
+  }
+});
 export default router;
