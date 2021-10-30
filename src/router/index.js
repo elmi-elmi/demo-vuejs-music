@@ -23,6 +23,7 @@ const routes = [
     // alias:'/manage',
     name: 'Manage',
     component: Manage,
+    meta: { requiresAuth: true },
     // beforeEnter: (to, from, next) => {
     //   next();
     // },
