@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,5 +22,5 @@ const storage = getStorage();
 
 // Initialize Firebase
 export {
-  fireBaseApp, db, onAuthStateChanged, storage, ref, uploadBytes,
+  fireBaseApp, db, onAuthStateChanged, storage, ref, uploadBytesResumable,
 };
