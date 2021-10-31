@@ -51,7 +51,12 @@
 </template>
 
 <script>
-import { storage, ref, uploadBytesResumable } from '@/includes/firebase';
+import { getAuth } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { getDownloadURL } from 'firebase/storage';
+import {
+  db, storage, ref, uploadBytesResumable,
+} from '@/includes/firebase';
 
 export default {
   name: 'Upload',
@@ -91,10 +96,24 @@ export default {
             this.uploads[uploadIndex].text_class = 'text-red-400';
             console.log(error);
           },
-          () => {
-            this.uploads[uploadIndex].variant = 'bg-green-400';
-            this.uploads[uploadIndex].icon = 'fas fa-check';
+          async () => {
+            const auth = getAuth();
+            const song = {
+              uid: auth.currentUser.uid,
+              // display_name: auth.currentUser.name,
+              original_name: uploadTask.snapshot.ref.name,
+              modified_name: uploadTask.snapshot.ref.name,
+              genre: '',
+              comment_count: 0,
+            };
             this.uploads[uploadIndex].text_class = 'text-green-400';
+
+            song.url = await getDownloadURL(uploadTask.snapshot.ref);
+            this.uploads[uploadIndex].variant = 'bg-green-400';
+            console.log('==================================', song);
+            await addDoc(collection(db, 'songs'), song);
+            console.log('==================================');
+            this.uploads[uploadIndex].icon = 'fas fa-check';
           },
         );
         console.log('end------------------');
