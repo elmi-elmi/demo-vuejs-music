@@ -33,6 +33,7 @@
       >
         <h5>Drop your files here</h5>
       </div>
+      <input type="file" multiple @change="upload($event)" />
       <hr class="my-6" />
       <div class="mb-4" v-for="upload in uploads" :key="upload.name">
         <div class="font-bold text-sm" :class="upload.text_class">
@@ -64,10 +65,10 @@ export default {
     return { is_dragover: false, uploads: [] };
   },
   methods: {
-    upload(event) {
+    upload($event) {
       this.is_dragover = false;
-      console.log(event.dataTransfer.files);
-      const files = [...event.dataTransfer.files];
+      // console.log($event.dataTransfer.files);
+      const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files];
       files.forEach((file) => {
         if (file.type !== 'audio/mpeg') {
           console.log('*********return ***', file.type);
@@ -106,13 +107,11 @@ export default {
               genre: '',
               comment_count: 0,
             };
-            this.uploads[uploadIndex].text_class = 'text-green-400';
 
             song.url = await getDownloadURL(uploadTask.snapshot.ref);
-            this.uploads[uploadIndex].variant = 'bg-green-400';
-            console.log('==================================', song);
             await addDoc(collection(db, 'songs'), song);
-            console.log('==================================');
+            this.uploads[uploadIndex].text_class = 'text-green-400';
+            this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
           },
         );
@@ -120,5 +119,18 @@ export default {
       });
     },
   },
+  beforeUnmount() {
+    console.log('=======unmounted 1========');
+    this.uploads.forEach((upload) => {
+      console.log('=======unmounted 2========');
+      console.log(upload.uploadTask);
+      upload.uploaTask.cancel();
+    });
+  },
+  // beforeUnmount() {
+  //   this.uploads.forEach((upload) => {
+  //     upload.task.cancel();
+  //   });
+  // },
 };
 </script>
