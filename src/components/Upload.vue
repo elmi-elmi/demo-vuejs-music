@@ -48,6 +48,7 @@
         </div>
       </div>
     </div>
+    <p>hisi</p>
   </div>
 </template>
 
@@ -118,15 +119,20 @@ export default {
         console.log('end------------------');
       });
     },
+    cancelUploads() {
+      this.uploads.forEach((upload) => {
+        upload.uploadTask.cancel();
+      });
+    },
   },
-  beforeUnmount() {
-    console.log('=======unmounted 1========');
-    this.uploads.forEach((upload) => {
-      console.log('=======unmounted 2========');
-      console.log(upload.uploadTask);
-      upload.uploaTask.cancel();
-    });
-  },
+  // beforeUnmount() {
+  //   console.log('=======unmounted 1========');
+  //   this.uploads.forEach((upload) => {
+  //     console.log('=======unmounted 2========');
+  //     console.log(upload.uploadTask);
+  //     upload.uploaTask.cancel();
+  //   });
+  // },
   // beforeUnmount() {
   //   this.uploads.forEach((upload) => {
   //     upload.task.cancel();
