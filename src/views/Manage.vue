@@ -49,21 +49,16 @@ export default {
     next();
   },
   async created() {
-    console.log('step 1---------------');
     const auth = getAuth();
     const q = query(collection(db, 'songs'), where('uid', '==', auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
     console.log('step 2---------------');
 
     querySnapshot.forEach((doc) => {
-      console.log('step x---------------');
-
       const song = { ...doc.data(), documentID: doc.id };
-
       this.songs.push(song);
     });
     console.log(this.songs);
-    console.log('step end---------------');
   },
   // beforeRouteEnter(to, from, next) {
   //   if (store.state.userLoggedIn) {

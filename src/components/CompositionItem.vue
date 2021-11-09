@@ -18,16 +18,21 @@
           bg-blue-600
           float-right
         "
-        @click.prevent="isShowForm = !isShowForm"
+        @click.prevent="showForm = !showForm"
       >
         <i class="fa fa-pencil-alt"></i>
       </button>
     </div>
     <div v-show="showForm">
-      <form>
+      <VeeForm
+        :validation-schema="schema"
+        :initial-values="song"
+        @submit="edit"
+      >
         <div class="mb-3">
           <label class="inline-block mb-2">Song Title</label>
-          <input
+          <VeeField
+            name="modified_name"
             type="text"
             class="
               block
@@ -43,10 +48,12 @@
             "
             placeholder="Enter Song Title"
           />
+          <ErrorMessage name="modified_name" class="text-red-400" />
         </div>
         <div class="mb-3">
           <label class="inline-block mb-2">Genre</label>
-          <input
+          <VeeField
+            name="genre"
             type="text"
             class="
               block
@@ -62,6 +69,7 @@
             "
             placeholder="Enter Genre"
           />
+          <ErrorMessage name="genre" class="text-red-400" />
         </div>
         <button
           type="submit"
@@ -75,7 +83,7 @@
         >
           Go Back
         </button>
-      </form>
+      </VeeForm>
     </div>
   </div>
 </template>
@@ -90,12 +98,11 @@ export default {
     },
   },
   data() {
-    return { isShowForm: false };
+    return { showForm: false, schema: { title: 'required|max:100', genre: 'required|max:100' } };
   },
-  computed: {
-    showForm() {
-      console.log('*****************');
-      return this.isShowForm;
+  methods: {
+    edit() {
+      console.log('edited');
     },
   },
 };
