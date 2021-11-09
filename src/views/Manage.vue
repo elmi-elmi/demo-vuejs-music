@@ -16,9 +16,11 @@
           </div>
           <div class="p-6">
             <CompositionItem
-              v-for="song in songs"
+              v-for="(song,indx) in songs"
               :key="song.documentID"
               :song="song"
+              :updateSong="updateSong"
+              :index="indx"
             />
           </div>
         </div>
@@ -52,13 +54,17 @@ export default {
     const auth = getAuth();
     const q = query(collection(db, 'songs'), where('uid', '==', auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
-    console.log('step 2---------------');
 
     querySnapshot.forEach((doc) => {
       const song = { ...doc.data(), documentID: doc.id };
       this.songs.push(song);
     });
-    console.log(this.songs);
+  },
+  methods: {
+    updateSong(values, index) {
+      this.songs[index].modified_name = values.modified_name;
+      this.songs[index].genre = values.genre;
+    },
   },
   // beforeRouteEnter(to, from, next) {
   //   if (store.state.userLoggedIn) {

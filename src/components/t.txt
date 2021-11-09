@@ -23,13 +23,7 @@
         <i class="fa fa-pencil-alt"></i>
       </button>
     </div>
-    <div
-      class="text-center font-bold text-white p-4 mb-4"
-      :class="variant_alert"
-      v-show="showAlert"
-    >
-      {{ messageAlert }}
-    </div>
+    <!-- <div class="text-center" :class="in_variant" v-show="showAlert"> {{messageAlert}}</div> -->
     <div v-show="showForm">
       <VeeForm
         :validation-schema="schema"
@@ -87,18 +81,20 @@
         <button
           type="button"
           class="py-1.5 px-3 rounded text-white bg-gray-600"
-          @click="showForm = false"
+          @click.prevent="showForm = false"
+
         >
           Go Back
         </button>
       </VeeForm>
     </div>
   </div>
+
 </template>
 
 <script>
-import { updateDoc, doc } from 'firebase/firestore';
-import { db } from '@/includes/firebase';
+// import { doc, updateDoc } from 'firebase/firestore';
+// import { db } from '@/includes/firebase';
 
 export default {
   name: 'CompositionItem',
@@ -119,47 +115,42 @@ export default {
   data() {
     return {
       showForm: false,
-      schema: { modified_name: 'required', genre: 'required' },
-      showAlert: false,
-      messageAlert: 'updating',
-      in_submission: true,
-      variant_alert: 'bg-blue-400',
+      schema: { title: 'required|max:100', genre: 'required|max:100' },
+      // in_submission: false,
+      // in_variant: 'bg-blue-400',
+      // showAlert: false,
+      // messageAlert: 'updating...',
     };
   },
   methods: {
-    async edit(values) {
-      console.log('edited');
-      this.showAlert = true;
-      this.in_submission = false;
-      this.variant_alert = 'bg-blue-300';
-      this.messageAlert = 'Please wait. Updating song info.';
-      console.log('----ref start -------');
-      console.log(values);
-      const songRef = doc(db, 'songs', this.song.documentID);
-      console.log('----ref end -------');
-
-      try {
-        console.log('----try start------');
-
-        await updateDoc(songRef, values);
-        console.log('----try end------');
-      } catch (err) {
-        console.log(err);
-        this.showAlert = true;
-        this.in_submission = false;
-        this.variant_alert = 'bg-red-300';
-        this.messageAlert = 'Something Wrong!';
-        return;
-      }
-      this.showAlert = true;
-      this.in_submission = false;
-      this.variant_alert = 'bg-green-300';
-      this.messageAlert = 'Success';
-
-      this.updateSong(values, this.index);
-      this.showAlert = false;
-      this.showForm = false;
+    edit() {
+      console.log('hi there----------------');
     },
+    // async edit(values) {
+    //   this.in_submission = false;
+    //   this.in_variant = 'bg-blue-400';
+    //   this.showAlert = true;
+    //   this.messageAlert = 'updating';
+    //   console.log('--------methods in items');
+    //   const songRef = doc(db, 'songs', this.index);
+    //   await updateDoc(songRef, values)
+    //     .catch((err) => {
+    //       this.in_submission = false;
+    //       this.in_variant = 'bg-red-400';
+    //       this.showAlert = true;
+    //       this.messageAlert = 'Something wrong';
+    //       console.log(err);
+    //     });
+    //   console.log('citem:---------------');
+    //   console.log(this.index);
+    //   console.log('====================');
+    //   // this.updateSong(values, this.index);
+    //   this.in_submission = false;
+    //   this.in_variant = 'bg-green-400';
+    //   this.showAlert = true;
+    //   this.messageAlert = 'success';
+    // },
+
   },
 };
 </script>
