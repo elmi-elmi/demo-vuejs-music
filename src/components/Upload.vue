@@ -61,6 +61,12 @@ import {
 
 export default {
   name: 'Upload',
+  props: {
+    addNewSongToList: {
+      type: Function,
+      require: true,
+    },
+  },
   data() {
     return { is_dragover: false, uploads: [] };
   },
@@ -113,6 +119,7 @@ export default {
             this.uploads[uploadIndex].text_class = 'text-green-400';
             this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
+            this.addNewSongToList(song);
           },
         );
         console.log('end------------------');

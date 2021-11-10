@@ -2,7 +2,7 @@
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <AppUpload ref="upload" />
+        <AppUpload ref="upload" :addNewSongToList="addNewSongToList" />
       </div>
       <div class="col-span-2">
         <div
@@ -21,6 +21,7 @@
               :song="song"
               :updateSong="updateSong"
               :index="indx"
+              :removeSong="removeSong"
             />
           </div>
         </div>
@@ -64,6 +65,12 @@ export default {
     updateSong(values, index) {
       this.songs[index].modified_name = values.modified_name;
       this.songs[index].genre = values.genre;
+    },
+    removeSong(index) {
+      this.songs.splice(index, 1);
+    },
+    addNewSongToList(song) {
+      this.songs.push(song);
     },
   },
   // beforeRouteEnter(to, from, next) {

@@ -4,6 +4,7 @@
       <h4 class="inline-block text-2xl font-bold">{{ song.modified_name }}</h4>
       <button
         class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
+        @click="deleteSong"
       >
         <i class="fa fa-times"></i>
       </button>
@@ -97,8 +98,9 @@
 </template>
 
 <script>
-import { updateDoc, doc } from 'firebase/firestore';
-import { db } from '@/includes/firebase';
+import { updateDoc, doc, deleteDoc } from 'firebase/firestore';
+import { ref, deleteObject } from 'firebase/storage';
+import { db, storage } from '@/includes/firebase';
 
 export default {
   name: 'CompositionItem',
@@ -115,6 +117,10 @@ export default {
       type: Number,
       require: true,
     },
+    removeSong: {
+      type: Function,
+      require: true,
+    },
   },
   data() {
     return {
@@ -127,6 +133,18 @@ export default {
     };
   },
   methods: {
+    async deleteSong() {
+      const desertRef = ref(storage, `songs/${this.song.original_name}`);
+      await deleteObject(desertRef)
+        .then(() => console.log('File Deleted successfully.'))
+        .catch((error) => console.log('In deleteObject something wrong: ', error));
+
+      await deleteDoc(doc(db, 'songs', this.song.documentID))
+        .then(() => console.log('Doc deleted successfully'))
+        .catch((error) => console.log('In deleteDoc something wrong:', error));
+
+      this.removeSong(this.index);
+    },
     async edit(values) {
       console.log('edited');
       this.showAlert = true;
