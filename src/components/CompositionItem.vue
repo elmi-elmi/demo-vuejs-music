@@ -55,6 +55,7 @@
               rounded
             "
             placeholder="Enter Song Title"
+            @input="updateUnsaveFlag(true)"
           />
           <ErrorMessage name="modified_name" class="text-red-400" />
         </div>
@@ -76,6 +77,7 @@
               rounded
             "
             placeholder="Enter Genre"
+            @input="updateUnsaveFlag(true)"
           />
           <ErrorMessage name="genre" class="text-red-400" />
         </div>
@@ -120,6 +122,9 @@ export default {
     removeSong: {
       type: Function,
       require: true,
+    },
+    updateUnsaveFlag: {
+      type: Function,
     },
   },
   data() {
@@ -175,6 +180,7 @@ export default {
       this.messageAlert = 'Success';
 
       this.updateSong(values, this.index);
+      this.updateUnsaveFlag(false);
       this.showAlert = false;
       this.showForm = false;
     },

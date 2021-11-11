@@ -22,6 +22,7 @@
               :updateSong="updateSong"
               :index="indx"
               :removeSong="removeSong"
+              :updateUnsaveFlag="updateUnsaveFlag"
             />
           </div>
         </div>
@@ -45,20 +46,20 @@ export default {
   components: { AppUpload, CompositionItem },
   name: 'Manage',
   data() {
-    return { songs: [] };
+    return { songs: [], unsaveFlag: false };
   },
-  beforeRouteLeave(to, from, next) {
-    this.$refs.upload.cancelUploads();
-    next();
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   this.$refs.upload.cancelUploads();
+  //   next();
+  // },
   async created() {
     const auth = getAuth();
     const q = query(collection(db, 'songs'), where('uid', '==', auth.currentUser.uid));
     const querySnapshot = await getDocs(q);
+    console.log('created querySnapshot:', querySnapshot.docs);
 
     querySnapshot.forEach((doc) => {
-      const song = { ...doc.data(), documentID: doc.id };
-      this.songs.push(song);
+      this.addNewSongToList(doc);
     });
   },
   methods: {
@@ -69,9 +70,25 @@ export default {
     removeSong(index) {
       this.songs.splice(index, 1);
     },
-    addNewSongToList(song) {
+    addNewSongToList(doc) {
+      console.log('querySnapshot doc.id : ', doc.id);
+      const song = { ...doc.data(), documentID: doc.id };
       this.songs.push(song);
     },
+    updateUnsaveFlag(value) {
+      console.log('from updateUnsaveFlag (value,unsaveFlage):', value, this.unsaveFlag);
+      this.unsaveFlag = value;
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log('beforeRouteLeave :', this.unsaveFlag);
+    if (!this.unsaveFlag) {
+      next();
+    } else {
+      // eslint-disable-next-line no-alert, no-restricted-globals
+      const leave = confirm('You have unsave changes. Are you sure that you want to leave?');
+      next(leave);
+    }
   },
   // beforeRouteEnter(to, from, next) {
   //   if (store.state.userLoggedIn) {

@@ -53,7 +53,7 @@
 
 <script>
 import { getAuth } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDoc } from 'firebase/firestore';
 import { getDownloadURL } from 'firebase/storage';
 import {
   db, storage, ref, uploadBytesResumable,
@@ -113,13 +113,15 @@ export default {
               genre: '',
               comment_count: 0,
             };
-
             song.url = await getDownloadURL(uploadTask.snapshot.ref);
-            await addDoc(collection(db, 'songs'), song);
+            const uploadedSongRef = await addDoc(collection(db, 'songs'), song);
             this.uploads[uploadIndex].text_class = 'text-green-400';
             this.uploads[uploadIndex].variant = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
-            this.addNewSongToList(song);
+
+            const songRefSnapshot = await getDoc(uploadedSongRef);
+            console.log('In async function songRef:', songRefSnapshot);
+            this.addNewSongToList(songRefSnapshot);
           },
         );
         console.log('end------------------');
