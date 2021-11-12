@@ -105,9 +105,10 @@ export default {
           },
           async () => {
             const auth = getAuth();
+            console.log('from uploading....auth.currentUser:', auth.currentUser);
             const song = {
               uid: auth.currentUser.uid,
-              // display_name: auth.currentUser.name,
+              display_name: auth.currentUser.displayName,
               original_name: uploadTask.snapshot.ref.name,
               modified_name: uploadTask.snapshot.ref.name,
               genre: '',
