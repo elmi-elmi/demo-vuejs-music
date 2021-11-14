@@ -45,7 +45,6 @@ import {
   query,
   limit,
   orderBy,
-  where,
   startAfter,
   doc,
   getDoc,
@@ -57,7 +56,7 @@ export default {
   name: 'Home',
   components: { SongItem },
   data() {
-    return { songs: [], maxPerPage: 3, pendingRequest: false };
+    return { songs: [], maxPerPage: 10, pendingRequest: false };
   },
   async created() {
     this.getSongs();

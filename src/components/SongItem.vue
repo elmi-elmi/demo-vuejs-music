@@ -13,14 +13,18 @@
     "
   >
     <div>
-      <a href="#" class="font-bold block text-gray-600">{{song.modified_name}}</a>
-      <span class="text-gray-500 text-sm">{{song.display_name}}</span>
+      <router-link
+        :to="{ name: 'Song', params: { id: song.documentID } }"
+        class="font-bold block text-gray-600"
+        >{{ song.modified_name }}</router-link
+      >
+      <span class="text-gray-500 text-sm">{{ song.display_name }}</span>
     </div>
 
     <div class="text-gray-600 text-lg">
       <span class="comments">
         <i class="fa fa-comments text-gray-600"></i>
-        {{song.comment_count}}
+        {{ song.comment_count }}
       </span>
     </div>
   </li>
