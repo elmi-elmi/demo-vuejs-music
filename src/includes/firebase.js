@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
@@ -20,7 +20,19 @@ const fireBaseApp = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage();
 
+const usersCollection = collection(db, 'users');
+const songsCollection = collection(db, 'songs');
+const commentsCollection = collection(db, 'comments');
+
 // Initialize Firebase
 export {
-  fireBaseApp, db, onAuthStateChanged, storage, ref, uploadBytesResumable,
+  fireBaseApp,
+  db,
+  onAuthStateChanged,
+  storage,
+  ref,
+  uploadBytesResumable,
+  usersCollection,
+  songsCollection,
+  commentsCollection,
 };

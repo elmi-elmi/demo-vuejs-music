@@ -35,7 +35,8 @@ export default createStore({
         email: payload.email,
       });
 
-      await updateProfile(userCred.user, { displayName: payload.name });
+      await updateProfile(userCred.user, { displayName: payload.name })
+        .then(() => console.log('register done.'));
 
       commit('authToggle');
     },
