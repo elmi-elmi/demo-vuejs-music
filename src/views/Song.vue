@@ -75,6 +75,7 @@
           </button>
         </VeeForm>
         <select
+        v-model="sort"
           class="
             block
             mt-4
@@ -97,13 +98,13 @@
   <ul class="container mx-auto">
     <li
       class="p-6 bg-gray-50 border border-gray-200"
-      v-for="comment in comments"
-      :key="comment.dataPoted"
+      v-for="comment in sortedComments"
+      :key="comment.documentID"
     >
       <!-- Comment Author -->
       <div class="mb-5">
         <div class="font-bold">{{ comment.name }}</div>
-        <time>{{ comment.dataPosted }}</time>
+        <time>time:{{ comment.datePosted }}</time>
       </div>
 
       <p>
@@ -133,10 +134,19 @@ export default {
       alert_show: false,
       alert_message: 'Adding comment. please wait.',
       in_submission: false,
+      sort: '1',
     };
   },
   computed: {
     ...mapState(['userLoggedIn']),
+    sortedComments() {
+      return this.comments.slice().sort((a, b) => {
+        if (this.sort === '1') {
+          return new Date(b.datePosted) - new Date(a.datePosted);
+        }
+        return new Date(a.datePosted) - new Date(b.datePosted);
+      });
+    },
   },
   async created() {
     // const songRef = doc(db, 'songs', this.$route.params.id);
@@ -186,6 +196,7 @@ export default {
         datePosted: new Date().toString(),
         name: auth.currentUser.displayName,
       };
+      console.log(comment);
 
       await addDoc(commentsCollection, comment)
         .then((res) => {

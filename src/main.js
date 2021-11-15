@@ -15,7 +15,7 @@ onAuthStateChanged(getAuth(), () => {
     app = createApp(App);
     app.use(store);
     app.use(router);
-    app.use(veeValidationPlugin, { foo: 5 });
+    app.use(veeValidationPlugin);
     app.mount('#app');
   }
 });
