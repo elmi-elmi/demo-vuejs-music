@@ -31,7 +31,7 @@
   <section class="container mx-auto mt-6">
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-        <span class="card-title">Comments ({{ comments.length }})</span>
+        <span class="card-title">Comments ({{ song.comment_count }})</span>
         <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
       </div>
       <div
@@ -115,7 +115,7 @@
 </template>
 <script>
 import {
-  getDoc, doc, addDoc, query, where, getDocs,
+  getDoc, doc, addDoc, query, where, getDocs, updateDoc,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { mapState } from 'vuex';
@@ -156,9 +156,11 @@ export default {
       this.$router.push({ name: 'Home' });
       return;
     }
-    this.song = songSnapshot.data();
+    this.song = { ...songSnapshot.data(), documentID: songSnapshot.id };
     // console.log('step 2  ------ add comments:');
 
+    const { sort } = this.$route.query;
+    this.sort = sort === '1' || sort === '2' ? sort : '1';
     this.getComments();
   },
 
@@ -196,7 +198,6 @@ export default {
         datePosted: new Date().toString(),
         name: auth.currentUser.displayName,
       };
-      console.log(comment);
 
       await addDoc(commentsCollection, comment)
         .then((res) => {
@@ -211,12 +212,28 @@ export default {
           console.log('something wrong to add comment', err);
         });
 
+      this.song.comment_count += 1;
+      console.log(this.song.documentID);
+      console.log(this.$route.params.id);
+      const songRef = doc(songsCollection, this.song.documentID);
+      await updateDoc(songRef, { comment_count: this.song.comment_count });
+
       this.alert_variant = 'bg-green-400';
       this.alert_message = 'Adding comment. please wait.';
       this.alert_show = false;
       this.in_submission = false;
 
       resetForm();
+    },
+  },
+  watch: {
+    sort(newValue) {
+      if (newValue === this.$route.query.sort) { return; }
+      this.$router.push({
+        query: {
+          sort: newValue,
+        },
+      });
     },
   },
 };
