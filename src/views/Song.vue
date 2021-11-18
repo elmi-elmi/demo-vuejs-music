@@ -6,6 +6,7 @@
     ></div>
     <div class="container mx-auto flex items-center">
       <button
+        @click="newSong(song)"
         type="button"
         class="
           z-50
@@ -118,7 +119,7 @@ import {
   getDoc, doc, addDoc, query, where, getDocs, updateDoc,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { commentsCollection, songsCollection } from '@/includes/firebase';
 
 export default {
@@ -165,6 +166,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['newSong']),
     async getComments() {
       // const auth = getAuth();
       // console.log(auth.currentUser.displayName);
