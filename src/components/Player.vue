@@ -57,6 +57,7 @@
           <span class="song-artist">Upload by({{currentSong.display_name}})</span>
         </div>
         <span
+         @click="updateSeek"
           class="
             block
             w-full
@@ -76,6 +77,7 @@
             <i class="fas fa-circle"></i>
           </span>
           <span
+
             class="
               block
               h-2
@@ -116,7 +118,7 @@ export default {
   name: 'Player',
   computed: { ...mapGetters(['playing']), ...mapState(['seek', 'duration', 'playerProgress', 'currentSong']) },
   methods: {
-    ...mapActions(['toggleAudio']),
+    ...mapActions(['toggleAudio', 'updateSeek']),
   },
 };
 </script>

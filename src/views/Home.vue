@@ -1,4 +1,5 @@
 <template>
+<main>
   <!-- Introduction -->
   <section class="mb-8 py-20 text-white text-center relative">
     <!-- <div
@@ -36,6 +37,7 @@
       <!-- .. end Playlist -->
     </div>
   </section>
+  </main>
 </template>
 
 <script>
