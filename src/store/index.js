@@ -5,13 +5,17 @@ import {
 import { setDoc, doc } from 'firebase/firestore';
 import { Howl } from 'howler';
 import { db } from '@/includes/firebase';
+import helper from '@/includes/helper';
 
 export default createStore({
   state: {
     authModalShow: false,
     userLoggedIn: false,
-    currenSong: {},
+    currentSong: {},
     sound: {},
+    seek: '00:00',
+    duration: '00:00',
+    playerProgress: '0%',
 
   },
   mutations: {
@@ -22,12 +26,18 @@ export default createStore({
       state.userLoggedIn = !state.userLoggedIn;
     },
     newSong(state, payload) {
-      state.currenSong = payload;
+      state.currentSong = payload;
       state.sound = new Howl({
         src: [payload.url],
         html5: true,
       });
     },
+    updatePosition(state) {
+      state.seek = helper.formatTime(state.sound.seek());
+      state.duration = helper.formatTime(state.sound.duration());
+      state.playerProgress = `${(state.sound.seek() / state.sound.duration()) * 100}%`;
+    },
+
   },
   getters: {
     authModalShow(state) {
@@ -40,6 +50,7 @@ export default createStore({
 
       return false;
     },
+
   },
   actions: {
     async register({ commit }, payload) {
@@ -75,10 +86,15 @@ export default createStore({
       await getAuth().signOut();
       commit('authToggle');
     },
-    async newSong({ commit, state }, payload) {
+    async newSong({ commit, state, dispatch }, payload) {
+      if (state.sound instanceof Howl) {
+        state.sound.unload();
+      }
       console.log('new song play....');
       commit('newSong', payload);
       state.sound.play();
+
+      state.sound.on('play', () => { requestAnimationFrame(() => { dispatch('progress'); }); });
     },
     async toggleAudio({ state }) {
       if (!state.sound.playing) {
@@ -89,6 +105,15 @@ export default createStore({
         state.sound.pause();
       } else {
         state.sound.play();
+      }
+    },
+    progress({ state, dispatch, commit }) {
+      commit('updatePosition');
+
+      if (state.sound.playing()) {
+        requestAnimationFrame(() => {
+          dispatch('progress');
+        });
       }
     },
   },
