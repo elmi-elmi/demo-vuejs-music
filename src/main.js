@@ -7,6 +7,7 @@ import store from './store/index';
 import './assets/tailwind.css';
 import './assets/main.css';
 import veeValidationPlugin from './includes/validation';
+import Icon from './directives/icon';
 
 let app;
 
@@ -16,6 +17,7 @@ onAuthStateChanged(getAuth(), () => {
     app.use(store);
     app.use(router);
     app.use(veeValidationPlugin);
+    app.directive('icon', Icon);
     app.mount('#app');
   }
 });
