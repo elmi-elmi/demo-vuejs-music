@@ -30,7 +30,7 @@
       >
         <div
           class="px-6 pt-6 pb-5 font-bold border-b border-gray-200"
-          v-icon.right.yellow="'headphones-alt'"
+          v-icon-secondary="{icon:'headphones-alt', right:true}"
         >
           <span class="card-title">Songs</span>
         </div>
@@ -57,10 +57,12 @@ import {
 } from 'firebase/firestore';
 import SongItem from '@/components/SongItem.vue';
 import { db } from '@/includes/firebase';
+import IconSecondary from '@/directives/icon-secondary';
 
 export default {
   name: 'Home',
   components: { SongItem },
+  directives: { IconSecondary },
   data() {
     return { songs: [], maxPerPage: 10, pendingRequest: false };
   },

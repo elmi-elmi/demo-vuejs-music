@@ -8,12 +8,13 @@ import './assets/tailwind.css';
 import './assets/main.css';
 import veeValidationPlugin from './includes/validation';
 import Icon from './directives/icon';
+import i18n from './includes/i18n';
 
 let app;
 
 onAuthStateChanged(getAuth(), () => {
   if (!app) {
-    app = createApp(App);
+    app = createApp(App).use(i18n);
     app.use(store);
     app.use(router);
     app.use(veeValidationPlugin);

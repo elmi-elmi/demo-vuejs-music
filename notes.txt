@@ -1,0 +1,523 @@
+43-=================================================
+css sass scss watch darken($red, 25%) variables.scss
+
+44-=================================================
+PostCss
+
+45- 46 - 47 -=================================================
+eslint - eslint formatter
+
+49-=================================================
+vuecli
+
+55-=================================================
+vue cli sass style lang="sass"
+npm install node-sass sass-loader --save-dev
+Fix the upstream dependency conflict:
+npm install sass-loader@10.2.0 
+
+55-63-=================================================(4-4)
+prop - emit - emits - slot v-slot
+
+
+64-=================================================(4-4)
+component :is="" ----- <keep-alive></keep-alive> -->unmounted   ---- activated() deactiveated()
+
+
+65 - 66-=================================================(4-4 folder)
+animations transitions enter-from enter-active enter-to leave
+<transition name="fade duration='1000' mode="out-in or in-out"> <p v-if="flag">transition me</p>
+
+
+67-=================================================(4-4 folder)
+@keyframes zoom-in
+animation: zoom-in 1s linear forwards appear type="animations or transition"
+
+
+68-=================================================(4-4 folder)
+javascript animations leave(el, done){ done()}
+
+71-72=================================================(4-4 folder)
+transition group *-move (add item)  position: absolute (remove item)
+
+73=================================================(4-4 folder)
+animate.css cdn animate.style
+enter-from-class=""
+      enter-active-class=""
+      enter-to-class=""
+      leave-from-class=""
+      leave-active-class=""
+      leave-to-class="">
+animation_duration:1s;
+74=================================================(8-1 folder)
+<%= BASE_URL %>
+
+79=================================================(8-1 folder)
+install yarn
+npm list -g --depth 0
+
+
+80-81=================================================(8-3 folder music)
+vue ui --- tasks dashboard open app
+82:
+plugins - dependencies
+trailing space:
+"files.trimTrailingWhitespace": true,
+84:
+tailwinds
+purgcss
+85:
+install  plugin: vue cli tailwind --- generate: minimum
+
+
+mutations, getters,,.....
+
+100=================================================(8-3 folder music)
+vee-validate
+101:
+includes install(app, option){}
+import {Form as VeeForm, Field as VeeField, DefineRule} from {vee-validate}
+form --> vee-form
+input --> vee-field
+import {required} from '@vee-validate/rules'}
+install(app){
+app.component('VeeFrom',VeeForm);
+app.component('VeeFrield',VeeField)
+defineRule('required',required)
+}
+
+104:
+<vee-form   :validation-schema="schema">
+
+data(){return{schema:{name:'required'}}
+
+105:
+import{min, max, alpha_spaces as alphaSpaces} from '@vee-validate/rules'
+defineRule('min', min) ....
+
+108:
+confirmed:@password
+109:
+not_one_of
+110:
+@submit
+
+111:
+slot:
+<hello-world v-slot="v">
+<hello-world #default="{user, favorite}">
+<p>hellooo</p {{v.user.name}}>
+</hello-world>
+<slot :user="user" :favorite="favorite"></slot>
+
+112:
+:bails="false"
+add close </vee-field> & add <input v-bind="field"/> to <vee-field v-slot="{field, error}" :bails="false"></vee-field>
+v-slot="{field, errors}
+
+113:
+:initial-value="userData"
+
+114: configure from vee-validate
+
+install(app){
+	app.component(..)
+	defineRule('',..)
+	configure({
+	generateMessage: (ctx) => {
+	min:`The field ${ctx.field} is too low`
+	.
+	.
+	.
+
+	}
+	})
+	const message = messages[ctx.rule.name] ? messages[ctx.rule.name]:`This field ${ctx.field} is invalid`
+	
+	return message
+}
+
+114:
+validation trigger
+
+118:
+firebase
+
+import {initializApp} from 'firebase/app'
+const firebaseConfig {
+	apiky:...
+	authDomain:..
+	.
+	.
+	appId:...
+}
+
+export default initializApp(firebaseConfig)
+
+
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+121:
+const auth = getAuth()
+const UserCred = await createUserWithEmailAndPassword(auth, email, password)
+
+
+124:
+import {getFirestore} from 'firebase/firestore';
+const db = getFirestore()
+
+import {collection, addDoc} from 'firebase/firestore'
+await addDoc(collection(db, 'users'),{name:name, ....});
+
+125:
+change rules in firebase
+
+allow read: if true;
+allow write: if request.auth.uid != null
+
+
+set duc uid
+
+import {setDoc, doc} from 'firebase/firestore';
+const userCredential = await createUserWithEmailAndPassword;
+
+await setDoc(doc(db, 'users', userCredential.user.uid), { email:email,....})
+
+129:
+updateProfile
+import {updateProfilr{ from 'firebase/auth'}
+await updateProfilr(userCrential.user, {displayName:...})
+
+130:
+import onAuthStateChanged from 'firebase/auth';
+onAuthStateChanged(auth, ()=>{if(!app){....}}
+
+134- 140 hash # webhash router router-link router-view
+import  {createRouter, createWebHistory} from 'vue-router'
+const routes  = {
+	{
+	  path:
+	  name:
+	  component:
+	}
+	{
+	...
+	}
+
+}
+const router = createRouter({
+	history: createWebHistory,
+	routes,
+	linkExactActiveClass: 'text-yellow-500'
+})
+
+141:active link
+linkExactActiveClass'text-yellow-500'
+<router-link exact-active-class="no-active"></router-link>
+
+142:
+route with name:   :to={name:'home', path...}
+
+143-144:
+redirect alias /:catchAll(.*)* 
+
+{
+name:'manage',
+path:'/manage-music',
+alias:'/manage'
+}
+{
+path:'/manage'
+redirect:{name:'manage'}
+}
+
+{
+path:'/:catchAll(.*)*
+redirect:{name:'home'}
+}
+145: Navigation Gaurds:
+router.beforeEach((to, from, next)=>{next()});
+
+********************************
+error: store most import in component becuase "this.$store" undefine in beforeRouteEnter()
+********************************f
+Manage.vue component:
+<script>
+import store from '@/store'
+export default {
+	beforeRouteEnter((to, from, next)=>{
+	
+	if(store.state.userLoggedIn)
+		{next()}else{ next({name:Home})}
+	
+	});
+}
+</script>
+
+
+
+signout(){
+	this.$store.dispatch('signout')
+	if(this.$route === 'Manage'){
+	this.$router.push({name:'Home'})	
+
+}
+}
+
+149=======================================
+route meta fields
+
+{
+name:'Manage'
+path:'/manage'
+component:...
+meta:{requiresAuth:true}
+}
+
+router.beforeEach((to, from, next)=>{
+	if(!to.matched.some(record => record.meta.requiresAuth)){ //if this path does not need auth
+		next();
+		return;
+		}
+
+	if(store.state.userLoggedIn){
+		next();
+	}else{
+		next({name:'Home'});
+	}
+});
+
+
+
+150=======================================
+avoiding dependency cycle
+
+
+151=======================================
+Uploading Files
+drag drop mime type
+
+@drag.prevent.stop=""
+@dragenter
+@dragstart
+@dragend
+@dragover
+@drop
+
+import {getStorage, ref, uploadBytes} from 'firebase/storage'
+const storage = getStorage();
+
+upload(event){
+	files = [...event.dataTransfer.files]
+	forEach((file)=>{
+		if(file.type !== 'audio.mpeg'){
+			return
+		}
+		
+		const songRef = ref(storage,`songs/${file.name}`;
+		uploadBytes(songRef, file)
+		
+	
+	})
+	
+
+}
+
+155:
+storage rules in firebase console
+
+request.resource.contentType == "audio/mpeg"
+or
+request.resource.contentType.match('audio/*');
+
+request.resource.size < 10*1024*1024;
+
+
+... to 160 snapshot
+
+import {addDoc, collection} from 'firebase/firestore'
+import {uploadBytesResumable} from 'firebase/storage
+import {getDownloadURL} from 'firebase/storage
+const uplaodTask = uploadBytesResumable(songRef, file)
+
+uploadTask.on('state-changed', snapshot=>{
+	const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+	this.uploads[uploadIndex].currentProgress = progress;
+}, (error)=>{...}, async()=>{
+				
+				const auth = getAuth();
+				const song = ...
+				song.url = await getDownloadURL(uploadTask.snapshot.ref)
+				await addDoc(collection(db, 'songs'), song)
+
+			})
+
+
+162 ====================== <input type='file' multiple @change="$event"
+
+163 ====================== cancel uploading method:1
+
+beforeUnmount(){
+	this.uploads.forEeach(upload=>{ upload.uploadTask.cancel})
+}
+
+
+163 ====================== cancel uploading method:2
+
+beforeRouteLeave(){
+ this.$refs.upload.cancelUploading()
+}
+
+171===========================
+error: In vee form submit do not use .prevent (@submit.prevent). Prevent set as by default in Vee Form.
+
+172===========================
+
+update doc:
+
+1: make ref song:
+
+const songRef = doc(db, 'songs', this.song.documentID);
+
+2: update ref:
+
+await updateDoc(songRef, values);
+
+
+174==========================
+Three step to delete song:
+
+// Step 1"
+
+// Set rule in firebase storage
+allow delete: if request.auth != null;
+
+
+// Step 2:
+
+// Delete song file from storage (Delete Object)
+
+
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
+const storage = getStorage();
+
+// Create a reference to the file to delete
+const desertRef = ref(storage, `songs/${this.song.original_name}`;
+
+// Delete the file
+deleteobject(desertRef)
+	.(()=>console.log('File delete successfully'))
+	.catch((error)=>console.log('Uh-oh, an error occured!));
+
+// Step 3:
+// Delete info in firestore DateBase (Delete Doc)
+
+import {doc, deleteDoc} from 'firebase/firestore'
+
+await deleteDoc(doc(db,'songs', this.song.documentID)
+
+
+
+// how find id of the song that upload to firebase storage:
+
+const uploadedSongRef = await addDoc(collection(db, 'songs'), song);
+const songRefSnapshot = await getDoc(uploadeSongRef);
+
+songRefSnapshot.id  contain id and other data
+
+
+176 =================================
+how get all songs from storage:
+
+const songCollection = collection(db, 'songs');
+const songSnapshot = await getDocs(songsCollection)
+
+songSnapshot.forEach(doc=>{
+const song = {
+		...doc.data(),
+		documentID:doc.id
+	     }
+
+});
+
+177==========================================================
+infinit scrolling
+scrollTop - offsetHeight ---> document.documnetElement
+innerHeight ---> window
+bottom Of window innerHeight + scrollTop === offsetrHeight
+
+
+178:
+
+const songsCollection = conllection(db,'songs')
+const lastSongRef = doc(db, 'songs', this.songs[this.songs.length-1])
+const lastSong = getDoc(lastSongRef)
+
+const nextSongsRef = query(songCollection, orderBy='modified_name', startAfter(lastSong),limit(3))
+songsSnapshots = await getDocs(nextSongsRef)
+
+
+179:
+dynamic route:
+{
+name:'song',
+path:'/song/:id'
+component:Song
+}
+
+$route.params.id
+
+180:
+
+<router-link :to="{name:'song' params:{id: song.documentID}" > {{}} </router-link>
+
+if(!docSnapshot.exists()){
+this.$router.push({name:'Home'})
+}
+
+181-185=====================comments validate  VeeField as='textarea' sort comments.slice.sort()
+185: difference of two Date Type:
+new Date(a.datePosted) - new Date(b.datePosted)
+
+186========================query parameters and path parameters
+Why we should use query? for saving user change.
+
+watch:{
+	sort(newValue){
+		if(newValue === this.$route.query.sort){return}
+		this.$router.push(
+			{
+				query:{sort:newValue}
+			}
+			
+			);
+	
+	}
+}
+
+const  {sort} = this.$route.params.query;
+this.sort = 'sort'===1 || 'sort'==='2 ? sort:'s'
+
+
+189=============================== Playing Music howler howlerjs.com
+npm install howler
+yarn add howler
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
