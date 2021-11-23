@@ -37,6 +37,13 @@
             </li>
           </template>
         </ul>
+        <ul class="flex flex-row mt-1 ml-auto">
+          <li>
+            <a class="px-2 text-white" href="#" @click.prevent="changeLocale">{{
+              currentLocale
+            }}</a>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
@@ -48,6 +55,9 @@ import { mapMutations, mapState } from 'vuex';
 export default {
   computed: {
     ...mapState(['userLoggedIn']),
+    currentLocale() {
+      return this.$i18n.locale === 'fa' ? 'فارسی' : 'English';
+    },
   },
   methods: {
     ...mapMutations(['authModalToggle']),
@@ -58,6 +68,9 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'Home' });
       }
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'en' ? 'fa' : 'en';
     },
     // authModalToggle() {
     //   this.$store.commit('authModalToggle');

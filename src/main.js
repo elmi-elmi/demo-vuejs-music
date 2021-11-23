@@ -9,12 +9,14 @@ import './assets/main.css';
 import veeValidationPlugin from './includes/validation';
 import Icon from './directives/icon';
 import i18n from './includes/i18n';
+import './registerServiceWorker';
 
 let app;
 
 onAuthStateChanged(getAuth(), () => {
   if (!app) {
-    app = createApp(App).use(i18n);
+    app = createApp(App);
+    app.use(i18n);
     app.use(store);
     app.use(router);
     app.use(veeValidationPlugin);

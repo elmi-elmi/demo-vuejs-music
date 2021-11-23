@@ -1,0 +1,15 @@
+{
+    "home": {
+      "listen":"موزیک خوب گوش بده!"
+    },
+    "song":{
+      "comments":"بدون نظر| ۱ نظر | {count} نظر"
+    },
+    "register":{
+      "accept":"I accept Music's{0}",
+      "TOS":"Terms of Services."
+    },
+    "manage":{
+      "my_songs":"آهنگ‌های من"
+    }
+ }
