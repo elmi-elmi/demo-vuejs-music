@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, enableIndexedDbPersistence } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
@@ -19,6 +19,10 @@ const firebaseConfig = {
 const fireBaseApp = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage();
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+    console.log(`Firebase persistance error ${err.code}`);
+  });
 
 const usersCollection = collection(db, 'users');
 const songsCollection = collection(db, 'songs');
