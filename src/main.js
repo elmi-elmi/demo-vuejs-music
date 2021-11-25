@@ -10,6 +10,7 @@ import veeValidationPlugin from './includes/validation';
 import Icon from './directives/icon';
 import i18n from './includes/i18n';
 import './registerServiceWorker';
+import GlobalsComponents from './includes/_globals';
 
 let app;
 
@@ -20,6 +21,7 @@ onAuthStateChanged(getAuth(), () => {
     app.use(store);
     app.use(router);
     app.use(veeValidationPlugin);
+    app.use(GlobalsComponents);
     app.directive('icon', Icon);
     app.mount('#app');
   }
