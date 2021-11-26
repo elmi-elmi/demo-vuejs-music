@@ -107,6 +107,7 @@ export default {
   },
   computed: {
     ...mapGetters(['authModalShow']),
+
   },
   methods: {
     ...mapMutations(['authModalToggle']),

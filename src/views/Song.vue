@@ -154,7 +154,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userLoggedIn']),
+    // ...mapState(['userLoggedIn']),
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    }),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
         if (this.sort === '1') {
@@ -164,20 +167,26 @@ export default {
       });
     },
   },
-  async created() {
+  async beforeRouteEnter(to, from, next) {
     // const songRef = doc(db, 'songs', this.$route.params.id);
-    const songRef = doc(songsCollection, this.$route.params.id);
+    // const songRef = doc(songsCollection, this.$route.params.id);
+    const songRef = doc(songsCollection, to.params.id);
     const songSnapshot = await getDoc(songRef);
-    if (!songSnapshot.exists()) {
-      this.$router.push({ name: 'Home' });
-      return;
-    }
-    this.song = { ...songSnapshot.data(), documentID: songSnapshot.id };
-    // console.log('step 2  ------ add comments:');
 
-    const { sort } = this.$route.query;
-    this.sort = sort === '1' || sort === '2' ? sort : '1';
-    this.getComments();
+    next((vm) => {
+      if (!songSnapshot.exists()) {
+        this.$router.push({ name: 'Home' });
+        return;
+      }
+      // eslint-disable-next-line no-param-reassign
+      vm.song = { ...songSnapshot.data(), documentID: songSnapshot.id };
+      // console.log('step 2  ------ add comments:');
+
+      const { sort } = vm.$route.query;
+      // eslint-disable-next-line no-param-reassign
+      vm.sort = sort === '1' || sort === '2' ? sort : '1';
+      vm.getComments();
+    });
   },
 
   methods: {
