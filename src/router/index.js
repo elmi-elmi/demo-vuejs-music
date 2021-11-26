@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store';
 
-import store from '@/store'; // ../store/index
-
+// import Home from '@/views/Home.vue';
+// import Manage from '@/views/Manage.vue';
+// import Song from '@/views/Song.vue';
+// import About from '@/views/About.vue';
 const Home = () => import('@/views/Home.vue');
+const Manage = () => import(/* webpackChunkName: "groupedChunk" */'@/views/Manage.vue');
+const Song = () => import(/* webpackChunkName: "groupedChunk" */'@/views/Song.vue');
 const About = () => import('@/views/About.vue');
-const Manage = () => import(/* webpackChunkName:"groupedChunk" */'@/views/Manage.vue');
-const Song = () => import(/* webpackChunkName:"groupedChunk" */'@/views/Song.vue');
 
 const routes = [
   {
@@ -28,9 +31,9 @@ const routes = [
     name: 'Manage',
     component: Manage,
     meta: { requiresAuth: true },
-    // beforeEnter: (to, from, next) => {
-    //   next();
-    // },
+    beforeEnter: (to, from, next) => {
+      next();
+    },
   },
   {
     path: '/manage',

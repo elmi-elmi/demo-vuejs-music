@@ -168,6 +168,7 @@ export default {
     },
   },
   async beforeRouteEnter(to, from, next) {
+  // async created() {
     // const songRef = doc(db, 'songs', this.$route.params.id);
     // const songRef = doc(songsCollection, this.$route.params.id);
     const songRef = doc(songsCollection, to.params.id);
@@ -175,7 +176,7 @@ export default {
 
     next((vm) => {
       if (!songSnapshot.exists()) {
-        this.$router.push({ name: 'Home' });
+        vm.$router.push({ name: 'Home' });
         return;
       }
       // eslint-disable-next-line no-param-reassign
@@ -187,6 +188,18 @@ export default {
       vm.sort = sort === '1' || sort === '2' ? sort : '1';
       vm.getComments();
     });
+    // if (!songSnapshot.exists()) {
+    //   this.$router.push({ name: 'Home' });
+    //   return;
+    // }
+    // // eslint-disable-next-line no-param-reassign
+    // this.song = { ...songSnapshot.data(), documentID: songSnapshot.id };
+    // // console.log('step 2  ------ add comments:');
+
+    // const { sort } = this.$route.query;
+    // // eslint-disable-next-line no-param-reassign
+    // this.sort = sort === '1' || sort === '2' ? sort : '1';
+    // this.getComments();
   },
 
   methods: {

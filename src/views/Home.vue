@@ -82,7 +82,7 @@ export default {
       const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
 
       if (bottomOfWindow) {
-        console.log('bottom of window');
+        // console.log('bottom of window');
         this.getSongs();
       }
     },
