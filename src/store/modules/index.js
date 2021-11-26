@@ -1,0 +1,1 @@
+const requireModules = require;
