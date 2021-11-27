@@ -504,6 +504,121 @@ npm install howler
 yarn add howler
 
 
+howler
+music
+
+
+directives
+icon
+icon-secondary
+
+
+203==================================================i18n 
+yarn add vue-i18n
+or
+npm install vue-i18n
+
+vue add i18n
+enter enter enter yes
+
+
+
+
+
+211 ============================== PWA
+yarn add @vue/cli-plugin-pwa
+yarn build
+or
+npm run build
+
+Installing in an Already Created Project:
+vue add pwa
+
+if will face error from npm:
+command failed: npm install --loglevel error @vue/cli-plugin-pwa@~4.5.0 -D
+use this:
+npm cache clear --force
+
+212-213
+lighthouse
+Remarks:
+Open dist folder and run server live 
+
+
+
+217
+firebase persistance
+db.enablePersistance();
+
+import {enableIndexedDbPersistence } from 'firebase/firestore'
+enableIndexedDbPersistence(db).catch(err=>console.log(err.code))
+
+218
+onLine or offLine  -- navigator
+if(!navigator.onLine){
+	this.uploads.push(....)
+
+	return
+}
+
+
+220:
+globaly components automatically
+****************************************************************************************
+دقیقه ۹.۵۵ رو متوجه نشدم درمورد :
+( نفهمیدم )
+// export default
+app.components(componentName, componentConfig.defautl || componentConfig)
+222========================organize store
+
+syntax for state:
+
+...mapState({playing:(getters)=>{getters.player.playing}})
+
+
+223: namespace
+224:auto module registration
+
+225:
+created() & beforeRouteEnter(to, from, next)
+
+next((vm)=>{
+	this=====>vm
+})
+
+227:
+webpack chunk:
+import Home from '@/view/Home.vue';
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+const Home = () => import('@/view/Home.vue');
+
+228:
+chunks groupedChunk
+const Home = () => import(/*webpackChunkName:"groupedChunk"*/'@/view/Home.vue');
+const About= () => import(/*webpackChunkName:"groupedChunk"*/'@/view/About.vue');
+
+229:=======================================================
+nprogress - bar
+
+progress-bar.js:
+import NProgress from 'nprogress';
+
+export default (router) => {
+  router.beforeEach((to, from, next) => {
+    NProgress.start();
+    next();
+  });
+
+  router.afterEach(NProgress.done);
+};
+
+main.js:
+import ProgressBar from './includes/progress-bar';
+import 'nprogress/nprogress.css'; ----> default css
+
+ProgressBar(router);
+230==============================================================
+monitoring performance -- coverage (in network button of window(console drawer) ) 
 
 
 
