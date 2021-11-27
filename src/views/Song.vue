@@ -25,7 +25,7 @@
         <div class="z-50 text-left ml-8">
           <div class="text-3xl font-bold">{{ song.modified_name }}</div>
           <div>{{ song.genre }}</div>
-          <div class="song-price">{{$n(1, 'currency', 'en')}}</div>
+          <div class="song-price">{{ $n(1, "currency", "en") }}</div>
         </div>
       </div>
     </section>
@@ -168,7 +168,7 @@ export default {
     },
   },
   async beforeRouteEnter(to, from, next) {
-  // async created() {
+    // async created() {
     // const songRef = doc(db, 'songs', this.$route.params.id);
     // const songRef = doc(songsCollection, this.$route.params.id);
     const songRef = doc(songsCollection, to.params.id);
