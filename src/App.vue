@@ -1,14 +1,14 @@
 <template>
   <app-header></app-header>
 
-  <router-view v-slot="{Component}">
-    <transition name='fade' mode="out-in">
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
       <component :is="Component"></component>
     </transition>
   </router-view>
 
   <!-- Player -->
-  <AppPlayer/>
+  <AppPlayer />
 
   <app-modal></app-modal>
 </template>
@@ -27,16 +27,16 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-from{
-  opacity:0;
+.fade-enter-from {
+  opacity: 0;
 }
 
-.fade-enter-active{
+.fade-enter-active {
   transition: all 0.5s linear;
 }
 
-.fade-leave-tp{
+.fade-leave-tp {
   transition: all 0.5s linear;
-  opacity:0;
+  opacity: 0;
 }
 </style>

@@ -620,6 +620,11 @@ ProgressBar(router);
 230==============================================================
 monitoring performance -- coverage (in network button of window(console drawer) ) 
 
+eslint eol end of line proble. error .
+add this code to rules in .eslintrc
+'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix']
+Therefore, default eol is crlf
+
 
 
 
