@@ -140,34 +140,34 @@ export default {
   methods: {
     async deleteSong() {
       const desertRef = ref(storage, `songs/${this.song.original_name}`);
-      await deleteObject(desertRef)
-        .then(() => console.log('File Deleted successfully.'))
-        .catch((error) => console.log('In deleteObject something wrong: ', error));
+      await deleteObject(desertRef);
+      // .then(() => console.log('File Deleted successfully.'))
+      // .catch((error) => console.log('In deleteObject something wrong: ', error));
 
-      await deleteDoc(doc(db, 'songs', this.song.documentID))
-        .then(() => console.log('Doc deleted successfully'))
-        .catch((error) => console.log('In deleteDoc something wrong:', error));
+      await deleteDoc(doc(db, 'songs', this.song.documentID));
+      // .then(() => console.log('Doc deleted successfully'))
+      // .catch((error) => console.log('In deleteDoc something wrong:', error));
 
       this.removeSong(this.index);
     },
     async edit(values) {
-      console.log('edited');
+      // console.log('edited');
       this.showAlert = true;
       this.in_submission = false;
       this.variant_alert = 'bg-blue-300';
       this.messageAlert = 'Please wait. Updating song info.';
-      console.log('----ref start -------');
-      console.log(values);
+      // console.log('----ref start -------');
+      // console.log(values);
       const songRef = doc(db, 'songs', this.song.documentID);
-      console.log('----ref end -------');
+      // console.log('----ref end -------');
 
       try {
-        console.log('----try start------');
+        // console.log('----try start------');
 
         await updateDoc(songRef, values);
-        console.log('----try end------');
+        // console.log('----try end------');
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         this.showAlert = true;
         this.in_submission = false;
         this.variant_alert = 'bg-red-300';

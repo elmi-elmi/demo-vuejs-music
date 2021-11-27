@@ -626,6 +626,34 @@ add this code to rules in .eslintrc
 Therefore, default eol is crlf
 
 
+231 =============================== vercel 
+npm run build
+(no console log)
+npm install -g vercel
+vercel login
+
+> vercel
+? set up....?Y
+? which scope...elmi-elmi
+? Link to existing projrct? n
+? What's you project's name" music-example
+? In which directory is you code located?./
+Want to override...? n
+
+
+
+231================================== test e2e unit test 
+.eslintrc.js ---- > add jest:true Hi  
+ env: {
+    node: true,
+    jest:true
+  },
+
+unite folder - example.spec:
+test('sanity test, ()=>{}');
+it(....)
+  test or it
+
 
 
 

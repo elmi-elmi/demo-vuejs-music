@@ -8,7 +8,7 @@ export default {
       const componentConfig = baseComponents(fileName);
       const componentName = _.upperFirst(_.camelCase(fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')));
 
-      console.log(componentName, fileName);
+      // console.log(componentName, fileName);
 
       app.component(`Base${componentName}`, componentConfig.default || componentConfig);
     });

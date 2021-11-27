@@ -19,10 +19,10 @@ const firebaseConfig = {
 const fireBaseApp = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage();
-enableIndexedDbPersistence(db)
-  .catch((err) => {
-    console.log(`Firebase persistance error ${err.code}`);
-  });
+enableIndexedDbPersistence(db);
+// .catch((err) => {
+//   console.log(`Firebase persistance error ${err.code}`);
+// });
 
 const usersCollection = collection(db, 'users');
 const songsCollection = collection(db, 'songs');

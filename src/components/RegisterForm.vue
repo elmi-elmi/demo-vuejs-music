@@ -210,7 +210,7 @@ export default {
   },
   methods: {
     async register(values) {
-      console.log(values.email, values.password);
+      // console.log(values.email, values.password);
       this.reg_in_submission = true;
       this.reg_show_alert = true;
       this.reg_alert_msg = 'Please wait! Your account is being created...';

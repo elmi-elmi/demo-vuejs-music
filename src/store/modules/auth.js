@@ -35,8 +35,8 @@ export default {
         email: payload.email,
       });
 
-      await updateProfile(userCred.user, { displayName: payload.name })
-        .then(() => console.log('register done.'));
+      await updateProfile(userCred.user, { displayName: payload.name });
+      // .then(() => console.log('register done.'));
 
       commit('authToggle');
     },

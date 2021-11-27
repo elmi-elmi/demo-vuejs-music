@@ -38,7 +38,7 @@ export default {
       if (state.sound instanceof Howl) {
         state.sound.unload();
       }
-      console.log('new song play....');
+      // console.log('new song play....');
       commit('newSong', payload);
       state.sound.play();
 

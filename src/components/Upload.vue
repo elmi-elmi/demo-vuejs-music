@@ -77,7 +77,7 @@ export default {
       const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files];
       files.forEach((file) => {
         if (file.type !== 'audio/mpeg') {
-          console.log('*********return ***', file.type);
+          // console.log('*********return ***', file.type);
           return;
         }
 
@@ -110,15 +110,15 @@ export default {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             this.uploads[uploadIndex].currentProgress = progress;
           },
-          (error) => {
+          () => {
             this.uploads[uploadIndex].variant = 'bg-red-400';
             this.uploads[uploadIndex].icon = 'fas fa-times';
             this.uploads[uploadIndex].text_class = 'text-red-400';
-            console.log(error);
+            // console.log(error);
           },
           async () => {
             const auth = getAuth();
-            console.log('from uploading....auth.currentUser:', auth.currentUser);
+            // console.log('from uploading....auth.currentUser:', auth.currentUser);
             const song = {
               uid: auth.currentUser.uid,
               display_name: auth.currentUser.displayName,
@@ -134,11 +134,11 @@ export default {
             this.uploads[uploadIndex].icon = 'fas fa-check';
 
             const songRefSnapshot = await getDoc(uploadedSongRef);
-            console.log('In async function songRef:', songRefSnapshot);
+            // console.log('In async function songRef:', songRefSnapshot);
             this.addNewSongToList(songRefSnapshot);
           },
         );
-        console.log('end------------------');
+        // console.log('end------------------');
       });
     },
     cancelUploads() {

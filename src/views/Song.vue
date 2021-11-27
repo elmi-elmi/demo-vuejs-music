@@ -243,17 +243,17 @@ export default {
           // console.log('----', res.id);
           this.comments.push({ ...comment, documentID: res.id });
         })
-        .catch((err) => {
+        .catch(() => {
           this.alert_variant = 'red-red-400';
           this.alert_show = true;
           this.alert_message = 'Something wrong';
           this.in_submission = false;
-          console.log('something wrong to add comment', err);
+          // console.log('something wrong to add comment', err);
         });
 
       this.song.comment_count += 1;
-      console.log(this.song.documentID);
-      console.log(this.$route.params.id);
+      // console.log(this.song.documentID);
+      // console.log(this.$route.params.id);
       const songRef = doc(songsCollection, this.song.documentID);
       await updateDoc(songRef, { comment_count: this.song.comment_count });
 
