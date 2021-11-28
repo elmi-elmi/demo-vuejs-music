@@ -625,6 +625,10 @@ add this code to rules in .eslintrc
 'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix']
 Therefore, default eol is crlf
 
+or 
+
+.\node_modules\.bin\eslint src\** --fix
+
 
 231 =============================== vercel 
 npm run build
@@ -653,6 +657,18 @@ unite folder - example.spec:
 test('sanity test, ()=>{}');
 it(....)
   test or it
+
+=================================
+  error ********************
+  Test suite failed to run
+
+    Cannot find module 'vue-template-compiler'
+    Require stack:
+
+
+solved===>upgrade version of vue-jest
+========================================
+
 
 
 
