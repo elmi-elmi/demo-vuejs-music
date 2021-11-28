@@ -669,6 +669,14 @@ it(....)
 solved===>upgrade version of vue-jest
 ========================================
 
+238 ============================= describe test router link router link stub
+import {RouterLinkStub} from '@vue/test-utils'
+global: { components: { 'router-link': RouterLinkStub } },
+
+toBe
+
+
+
 
 
 
