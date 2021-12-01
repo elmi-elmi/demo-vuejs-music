@@ -675,6 +675,19 @@ global: { components: { 'router-link': RouterLinkStub } },
 
 toBe
 
+241========================
+
+242:
+jest mock
+.
+.
+.
+I skipped the test part.
+.
+.
+.
+252============================
+composition API
 
 
 
