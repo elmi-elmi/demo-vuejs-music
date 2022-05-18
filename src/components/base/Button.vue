@@ -1,5 +1,5 @@
 <template>
-  <button type="button">press me</button>
+  <button v-show='false' type="button">press me</button>
 </template>
 
 <script>
