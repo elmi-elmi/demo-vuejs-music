@@ -18,10 +18,10 @@
           </p>
         </div>
       </div>
-      <!-- <img
+       <img
       class="relative block mx-auto mt-5 -mb-20 w-auto max-w-full"
       src="assets/img/introduction-music.png"
-    /> -->
+    /> 
     </section>
 
     <!-- Main Content -->
